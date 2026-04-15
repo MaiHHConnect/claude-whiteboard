@@ -1,89 +1,123 @@
-# Claude 白白板
+# Claude 白白板 / Claude 白白板
 
-*榨干每一单位 token 效率的多 Agent 白板工作台*
+*榨干每一单位 token 效率的多 Agent 白板工作台*  
+*TokenJuice Whiteboard — Multi-Agent Workstation for Maximum Token Efficiency*
 
 ![Claude 白白板: AI Agent Dashboard with task pipeline, system metrics, Wiki knowledge base and Skill management](assets/preview.jpg)
 
-Claude 白白板 is an open-source control center for Claude Code / AI Agent workflows — combining task decomposition, sequential/parallel scheduling, execution, automatic QA, fix loops, Wiki knowledge沉淀, and Skill self-evolution on a single visual board. It's not just another TODO kanban; it's an agent workbench where "planner, executor, and evaluator" continuously collaborate.
+---
 
-**SEO Title:** Claude 白白板 - Claude Code Multi-Agent Whiteboard Workstation & AI Automation Kanban
+## 📖 中文介绍
 
-**SEO Description:** Claude 白白板 is an open-source AI Agent workstation supporting Claude Code multi-agent scheduling, task decomposition, automatic QA, Wiki knowledge capture, Skill auto-generation and token efficiency optimization.
+**Claude 白白板** 是一个面向 Claude Code / AI Agent 工作流的开源控制台：把任务拆解、顺序/并行调度、执行、自动 QA、修复循环、Wiki 沉淀和 Skill 自进化放在同一个白板上。它不是又一个普通 TODO 看板，而是一个让"规划器、执行器、评估器"持续协作的 agent workbench。
 
-**SEO Keywords:** Claude Code, AI Agent, Multi-Agent, Agent Workbench, AI Kanban, automated development, multi-agent scheduling, Wiki knowledge base, Skill self-evolution, Token Efficiency, Whiteboard Workstation
+### 核心能力
 
-## Why Claude 白白板
+- **多 Agent 看板**：`Backlog → Analyzing → InDev → ReadyForTest → InFix → Done/Blocked`
+- **自动任务分解**：支持父子任务、依赖 DAG、并行组、验收标准和 QA Rubric
+- **自动 QA 调度**：任务到待测试后自动由 QA agent 验证，失败自动回修复
+- **transient error retry**：对 429/529/overloaded 等临时错误自动重试
+- **Wiki + Skill 沉淀**：完成任务自动提取知识卡片和可复用 `.skill.md`
+- **Claude agents 打包**：`agents/claude/` 角色模板（规划/执行/测试/安全审查等）
+- **Web UI**：本地浏览器白板，实时看任务、Agent、Wiki、Skill 和调度状态
+- **钉钉集成**：可选 Webhook / Stream 通知和交互
 
-Long-running AI coding hits three common walls: context drift, over-generous self-assessment, and chaotic parallelism on complex tasks. TokenJuice makes these bottlenecks explicit and product-driven:
+### 工作流程
 
-- **Planner expands specs first**: Turn a one-line request into a product goal with subtasks, acceptance criteria, dependencies, and handoff artifacts.
-- **Executor delivers by contract**: Every task has a "sprint contract" — must produce real files, verification commands, and a handoff summary.
-- **Evaluator independently pokes holes**: QA doesn't rely on the executor's self-praise; it scores functional completeness, real artifacts, usability, visual design, and code quality.
-- **Dependency-aware scheduling**: Child tasks under the same parent follow `dependsOn` order; independent tasks still run in parallel to fill capacity.
-- **Automatic fix loop on failure**: Test failures automatically enter fix mode — no human "approve/reject" button needed.
-- **Knowledge capture loop**: Completed tasks沉淀 into Wiki; reusable patterns become Skills — the system gets smarter with every run.
+```
+用户一句话需求 → Planner 扩规格 → 生成子任务 DAG + 验收标准
+  → Executor 按冲刺契约实现 → QA 独立验证
+  → 通过 → Done → Wiki / Skill 沉淀
+  → 失败 → InFix 自动修复 → 重新实现
+```
 
-## Core Features
-
-- **Multi-Agent Kanban**: `Backlog → Analyzing → InDev → ReadyForTest → InFix → Done/Blocked`
-- **Automatic task decomposition**: Parent/child tasks, dependency DAGs, parallel groups, acceptance criteria, and QA Rubrics.
-- **Automatic QA scheduling**: Tasks auto-trigger QA agent verification when reaching "Ready for Test"; failures auto-loop to fix.
-- **Transient error retry**: Automatic retry on 429/529/overloaded errors — avoids false business bugs.
-- **Wiki + Skill沉淀**: Task completion triggers knowledge cards and reusable `.skill.md` generation.
-- **Claude agents packaged**: Repository includes `agents/claude/` role templates for planning, execution, testing, security review, etc.
-- **Web UI**: Local browser whiteboard with real-time view of tasks, agents, Wiki, Skills, and scheduling status.
-- **DingTalk integration**: Optional Webhook / Stream notifications and interactive commands.
-
-## What the Preview Shows
-
-The preview captures the TokenJuice main workstation: top bar shows system connection status, scheduler state, agent capacity and task stats; center displays the full pipeline from Backlog, Analyzing, InDev, ReadyForTest, InFix to Done; sidebar covers Wiki knowledge base, Skill management, and real-time task details. This interface is designed for observing multi-agent collaboration — not waiting for a black-box run to finish before knowing success or failure.
-
-## Quick Start
+### 快速开始
 
 ```bash
 npm install
 cp .env.example .env
 npm start
+# 打开 http://localhost:8085
 ```
-
-Open your browser at `http://localhost:18789` (or the port shown in terminal).
-
-## Architecture
-
-TokenJuice uses a Planner → Executor → Evaluator → Wiki/Skill loop:
-
-```
-Planner: Spec → Tasks → Dependencies → QA Rubrics
-Scheduler: Assigns tasks based on capacity + DAG
-Executor: Produces artifacts + verification commands + handoff summary
-QA: Independent skeptical verification → bug report → auto-fix
-Wiki/Skill:沉淀 completed work → reusable knowledge
-```
-
-See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for full design notes.
-
-## Project Structure
-
-```
-claude-whiteboard/
-├── agents/          # Claude agent role templates
-├── assets/          # Preview images
-├── data/            # Runtime data (scheduler state)
-├── docs/            # Architecture, SEO, Skills & Agents docs
-├── public/         # Static web assets
-├── scripts/        # Utility scripts (secret scan, etc.)
-├── skills/         # Auto-generated + manual Skills
-├── src/            # Core application (Koa + WebSocket server)
-├── test/           # Test files
-├── WORKFLOW.md     # Development workflow guide
-├── README.md       # Chinese README (中文说明)
-└── README_EN.md    # This file (English)
-```
-
-## License
-
-MIT License — see [LICENSE](LICENSE)
 
 ---
 
-*Claude 白白板 — Every token counts.*
+## 🌐 English Introduction
+
+**Claude 白白板 (TokenJuice Whiteboard)** is an open-source control center for Claude Code / AI Agent workflows — combining task decomposition, sequential/parallel scheduling, execution, automatic QA, fix loops, Wiki knowledge capture, and Skill self-evolution on a single visual board. It's not just another TODO kanban; it's an agent workbench where "planner, executor, and evaluator" continuously collaborate.
+
+### Core Features
+
+- **Multi-Agent Kanban**: `Backlog → Analyzing → InDev → ReadyForTest → InFix → Done/Blocked`
+- **Automatic task decomposition**: Parent/child tasks, dependency DAGs, parallel groups, acceptance criteria, and QA Rubrics
+- **Automatic QA scheduling**: Tasks auto-trigger QA agent verification; failures auto-loop to fix
+- **Transient error retry**: Automatic retry on 429/529/overloaded errors — no false bugs
+- **Wiki + Skill capture**: Task completion triggers knowledge cards and reusable `.skill.md`
+- **Claude agents packaged**: `agents/claude/` role templates for planning, execution, testing, security review, etc.
+- **Web UI**: Local browser whiteboard with real-time task, agent, Wiki, Skill and scheduling status
+- **DingTalk integration**: Optional Webhook / Stream notifications and interactive commands
+
+### Workflow
+
+```
+User request → Planner expands specs → Subtask DAG + acceptance criteria
+  → Executor delivers by contract → QA independent verification
+  → Pass → Done → Wiki / Skill capture
+  → Fail → InFix auto-repair → Re-implement
+```
+
+### Quick Start
+
+```bash
+npm install
+cp .env.example .env
+npm start
+# Open http://localhost:8085
+```
+
+---
+
+## 📁 Project Structure / 项目结构
+
+```
+.
+├── agents/claude/          # Claude agent role templates / Claude Agent 角色模板
+├── assets/                 # Preview images / 预览图
+├── docs/                   # Architecture, SEO, SKILLS docs / 架构和文档
+├── public/                 # Web UI static assets / 白板前端资源
+├── scripts/                # Utility scripts / 工具脚本
+├── skills/                 # Built-in + auto-generated Skills / 内置与自动沉淀 Skills
+├── src/                    # Core (Koa + WebSocket server) / 核心应用
+├── test/                   # Tests / 测试
+├── data/                   # Runtime data (not committed) / 运行数据
+├── WORKFLOW.md            # Development workflow guide / 开发流程指南
+├── README_zh.md           # Chinese version / 中文版
+└── package.json
+```
+
+## 🔒 Security / 安全说明
+
+No secrets are committed. Run before publishing:
+
+```bash
+npm run scan:secrets   # or: node scripts/secret-scan.mjs
+```
+
+Excluded from git: `node_modules/`, `.env`, `data/*.json`, `workspaces/`, `memory/`
+
+---
+
+## 📄 License / 许可证
+
+MIT License
+
+---
+
+## 🔗 Links / 链接
+
+- **GitHub**: https://github.com/MaiHHConnect/claude-whiteboard
+- **Chinese README**: [README_zh.md](README_zh.md)
+
+---
+
+*Claude 白白板 — Every token counts. 每一单位 token 都榨干。*

@@ -1,5 +1,5 @@
 {
-  "name": "tokenjuice-agent-workbench",
+  "name": "claude-whiteboard",
   "version": "1.0.0",
   "description": "TokenJuice 白板：榨干每一单位 token 效率的多 Agent 白板工作台，集成任务看板、Wiki 沉淀、Skill 自进化与自动 QA 调度。",
   "type": "module",

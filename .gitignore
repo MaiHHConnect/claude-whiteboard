@@ -1,0 +1,17 @@
+node_modules/
+.env
+.env.*
+!.env.example
+data/*.json
+!data/*.example.json
+workspaces/
+memory/
+.DS_Store
+*.log
+coverage/
+dist/
+tmp/
+screenshots/
+playwright-report/
+.nyc_output/
+.omc/skills/*/tracking/

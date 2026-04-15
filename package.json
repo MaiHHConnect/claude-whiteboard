@@ -1,0 +1,28 @@
+{
+  "name": "tokenjuice-agent-workbench",
+  "version": "1.0.0",
+  "description": "TokenJuice 白板：榨干每一单位 token 效率的多 Agent 白板工作台，集成任务看板、Wiki 沉淀、Skill 自进化与自动 QA 调度。",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "scan:secrets": "node scripts/secret-scan.mjs"
+  },
+  "dependencies": {
+    "@koa/router": "^12.0.1",
+    "@playwright/mcp": "^0.0.70",
+    "koa": "^2.15.0",
+    "koa-bodyparser": "^4.4.1",
+    "koa-static": "^5.0.0",
+    "node-pty": "^1.1.0",
+    "uuid": "^9.0.1",
+    "ws": "^8.20.0",
+    "yaml": "^2.8.3"
+  },
+  "devDependencies": {
+    "@types/koa": "^2.13.12",
+    "@types/koa__router": "^12.0.4",
+    "@types/koa-bodyparser": "^4.3.12",
+    "@types/uuid": "^9.0.7"
+  }
+}

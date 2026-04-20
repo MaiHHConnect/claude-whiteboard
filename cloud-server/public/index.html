@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>白白板</title>
+  <title>Claude 白板 | Maximize Every Token</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -227,6 +227,27 @@
       transform: scale(0.97);
     }
 
+    .btn-secondary {
+      background: white;
+      color: #1D1D1F;
+      padding: 10px 18px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 500;
+      border: 1px solid #D1D1D6;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+
+    .btn-secondary:hover {
+      background: #F5F5F7;
+      border-color: #B8B8BE;
+    }
+
     .status-dot {
       width: 8px;
       height: 8px;
@@ -322,9 +343,12 @@
         <div class="bg-[#1D1D1F] p-2 rounded-xl">
           <i class="fas fa-robot text-white text-sm"></i>
         </div>
-        <h1 class="text-xl font-semibold tracking-tight">
-          白白板 <span class="font-normal text-[#86868B] ml-1">AI Agent 工作台</span>
-        </h1>
+        <div>
+          <h1 class="text-xl font-semibold tracking-tight">
+            Claude 白板 <span class="font-normal text-[#86868B] ml-1">Maximize Every Token</span>
+          </h1>
+          <p class="text-[11px] text-[#86868B] mt-0.5">目标就一个：一句话出结果。</p>
+        </div>
       </div>
 
       <div class="flex items-center gap-4">
@@ -343,6 +367,10 @@
         <button onclick="toggleSelectMode()" id="select-mode-btn" class="p-2 text-[#86868B] hover:text-[#1D1D1F] hover:bg-[#E5E5EA] rounded-full transition-colors">
           <i class="fas fa-check-square"></i>
         </button>
+        <a href="https://github.com/MaiHHConnect/claude-whiteboard" target="_blank" rel="noreferrer" class="btn-secondary">
+          <i class="fab fa-github"></i>
+          GitHub 仓库
+        </a>
         <button onclick="openCreateTask()" class="btn-primary">
           <i class="fas fa-plus"></i>
           新任务

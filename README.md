@@ -1,6 +1,18 @@
-# AI Agent 协作开发平台
+# Claude 白板 - 榨干每单位代币效率的 Claude Code 多代理白板工作台 | Maximize Every Token
 
-基于 Claude Code + MCP 架构的多 Agent 协作平台。
+目标就一个：一句话出结果。
+
+🌐 语言 / Language: 🇺🇸 English | 🇨🇳 中文 | 🇯🇵 日本語 | 🇰🇷 한국어 | 🇹🇼 繁體中文 | 🇧🇷 Português (BR) | 🇪🇸 Español | 🇩🇪 Deutsch | 🇫🇷 Français | 🇷🇺 Русский | 🇮🇹 Italiano | 🇵🇱 Polski | 🇺🇦 Українська | 🇻🇳 Tiếng Việt | 🇮🇩 Indonesia | 🇹🇭 ไทย | 🇮🇳 हिन्दी | 🇳🇱 Nederlands | 🇹🇷 Türkçe | 🇸🇪 Svenska | 🇬🇷 Ελληνικά | 🇭🇺 Magyar | 🇨🇿 Čeština | 🇩🇰 Dansk | 🇳🇴 Norsk | 🇫🇮 Suomi | 🇷🇴 Română | 🇸🇦 العربية | 🇮🇱 עברית | 🇧🇩 বাংলা | 🇵🇰 اردو | 🇵🇹 Português (PT)
+
+## 授权与商用
+
+本项目采用 [Apache-2.0](./LICENSE) 许可协议，明确允许个人使用、团队协作、二次开发和商业使用。
+
+- 允许商用、分发、修改和私有部署。
+- 保留原始许可与版权声明即可。
+- 项目名称、品牌标识和商标本身不随许可证自动授权。
+
+仓库地址：[MaiHHConnect/claude-whiteboard](https://github.com/MaiHHConnect/claude-whiteboard)
 
 ## 本次版本更新
 

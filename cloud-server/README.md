@@ -1,6 +1,12 @@
-# Cloud Server - AI Agent 看板
+# Claude 白板 Cloud Server | Maximize Every Token
 
-基于 Claude 源码架构的多 Agent 任务调度系统。
+一句话进来，协作跑完，结果出来。
+
+仓库地址：[MaiHHConnect/claude-whiteboard](https://github.com/MaiHHConnect/claude-whiteboard)
+
+## 授权与商用
+
+本项目采用 [Apache-2.0](../LICENSE) 许可协议，允许商业使用、私有部署和二次开发。
 
 ## 本次版本更新
 

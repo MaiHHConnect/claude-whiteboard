@@ -14,6 +14,8 @@
 
 仓库地址：[MaiHHConnect/claude-whiteboard](https://github.com/MaiHHConnect/claude-whiteboard)
 
+发布说明：[PUBLISHING.md](./PUBLISHING.md)
+
 ## 本次版本更新
 
 - 发布为精简后的公开版本，移除了内部任务记录、Wiki 沉淀、修复过程文档和本地运行产物。

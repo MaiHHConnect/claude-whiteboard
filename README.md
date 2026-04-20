@@ -14,14 +14,14 @@
 
 仓库地址：[MaiHHConnect/claude-whiteboard](https://github.com/MaiHHConnect/claude-whiteboard)
 
-发布说明：[PUBLISHING.md](./PUBLISHING.md)
-
 ## 本次版本更新
 
 - 发布为精简后的公开版本，移除了内部任务记录、Wiki 沉淀、修复过程文档和本地运行产物。
 - 保留可运行的核心代码：调度器 CLI、MCP 服务、云端 `cloud-server`、Web UI、测试与示例配置。
 - 补齐发布边界：新增 `.gitignore`，避免把工作区数据、自动沉淀内容、私有过程文档一并提交。
 - 当前版本聚焦白板式多 Agent 协作与任务调度能力，便于直接部署、二次开发和对外展示。
+- Web 首页更新为荧光绿 + 白卡片的新视觉风格，统一品牌氛围与操作层级。
+- 创建任务时的“操作文件夹 / 资料路径”支持系统文件夹选择器，不再只能手动输入路径。
 
 ## 项目状态
 

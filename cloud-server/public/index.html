@@ -9,53 +9,97 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
+    :root {
+      --accent: #d4ff17;
+      --accent-strong: #c4ff00;
+      --accent-soft: #efff9e;
+      --surface: rgba(255, 255, 255, 0.96);
+      --surface-soft: rgba(255, 255, 255, 0.72);
+      --panel: #f7f8f2;
+      --line: rgba(15, 20, 11, 0.1);
+      --ink: #11130d;
+      --muted: #6d7264;
+      --shadow: 0 18px 48px rgba(70, 84, 19, 0.12);
+    }
+
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #F5F5F7;
-      color: #1D1D1F;
+      background:
+        radial-gradient(circle at top left, rgba(212, 255, 23, 0.65) 0, rgba(212, 255, 23, 0.18) 18%, rgba(255, 255, 255, 0) 40%),
+        radial-gradient(circle at bottom right, rgba(212, 255, 23, 0.28) 0, rgba(212, 255, 23, 0.08) 16%, rgba(255, 255, 255, 0) 34%),
+        linear-gradient(180deg, #f8faf0 0%, #f2f5e6 100%);
+      color: var(--ink);
       min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle at 20% 18%, rgba(255,255,255,0.72) 0 86px, transparent 87px),
+        radial-gradient(circle at 82% 16%, rgba(255,255,255,0.52) 0 120px, transparent 121px),
+        radial-gradient(circle at 10% 74%, rgba(255,255,255,0.45) 0 74px, transparent 75px),
+        radial-gradient(circle at 90% 76%, rgba(255,255,255,0.45) 0 110px, transparent 111px);
+      opacity: 0.9;
+      z-index: 0;
     }
 
     .glass-header {
-      background: rgba(255, 255, 255, 0.72);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      box-shadow: var(--shadow);
+      border-radius: 32px;
     }
 
     .stat-card {
-      background: white;
-      border-radius: 24px;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.02);
+      background: linear-gradient(180deg, rgba(212, 255, 23, 0.65) 0 10px, rgba(255, 255, 255, 0.98) 10px 100%);
+      border-radius: 28px;
+      border: 1px solid rgba(20, 24, 12, 0.08);
+      box-shadow: 0 14px 34px rgba(109, 128, 28, 0.08);
       transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
     }
 
     .stat-card:hover {
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-      transform: translateY(-2px);
+      box-shadow: 0 20px 42px rgba(84, 104, 18, 0.14);
+      transform: translateY(-4px);
     }
 
     .kanban-column {
-      background: transparent;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      border-radius: 30px;
+      padding: 16px 14px;
+      box-shadow: 0 20px 42px rgba(91, 108, 24, 0.08);
+      backdrop-filter: blur(12px);
     }
 
     .task-card {
-      background: white;
-      border-radius: 20px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
-      border: 1px solid rgba(0, 0, 0, 0.05);
+      background: linear-gradient(180deg, rgba(212, 255, 23, 0.42) 0 8px, rgba(255, 255, 255, 0.98) 8px 100%);
+      border-radius: 24px;
+      box-shadow: 0 10px 26px rgba(77, 90, 28, 0.08);
+      border: 1px solid rgba(17, 19, 13, 0.08);
       transition: all 0.3s ease;
       overflow: hidden;
     }
 
     .task-card:hover {
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-      border-color: rgba(0, 0, 0, 0.1);
+      box-shadow: 0 18px 36px rgba(70, 80, 25, 0.14);
+      border-color: rgba(17, 19, 13, 0.12);
     }
 
     /* 终端风格输出区域（淡灰色背景） */
     .terminal-output {
-      background: #F5F5F7;
-      border-radius: 6px;
+      background: #f4f6ea;
+      border-radius: 14px;
+      border: 1px solid rgba(17, 19, 13, 0.08);
       padding: 6px 10px;
       margin-top: 4px;
       font-family: 'SF Mono', Monaco, Menlo, monospace;
@@ -80,12 +124,12 @@
     }
 
     .terminal-output .terminal-line .prefix {
-      color: #86868B;
+      color: var(--muted);
       flex-shrink: 0;
     }
 
     .terminal-output .terminal-line .agent-tag {
-      color: #AF52DE;
+      color: #4d5b17;
       flex-shrink: 0;
       max-width: 100%;
       overflow: hidden;
@@ -163,26 +207,27 @@
     }
 
     .terminal-container .text-\[\#5A5A5E\] {
-      color: #86868B !important;
+      color: var(--muted) !important;
     }
 
     .active-task-card {
-      background: white;
-      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(212, 255, 23, 0.62) 0 14px, rgba(255,255,255,0.97) 14px 100%);
+      border-radius: 28px;
       padding: 24px;
-      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.02);
-      border: 1px solid #E5E5EA;
+      box-shadow: 0 18px 42px rgba(74, 88, 20, 0.1);
+      border: 1px solid rgba(17, 19, 13, 0.08);
       transition: all 0.5s ease;
     }
 
     .active-task-card:hover {
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 24px 54px rgba(74, 88, 20, 0.14);
     }
 
     .badge {
-      background: #F5F5F7;
+      background: #11130d;
+      color: #fff;
       padding: 8px 14px;
-      border-radius: 12px;
+      border-radius: 999px;
       font-size: 14px;
       font-weight: 500;
       display: flex;
@@ -205,7 +250,7 @@
     }
 
     .btn-primary {
-      background: #0071E3;
+      background: #11130d;
       color: white;
       padding: 10px 20px;
       border-radius: 100px;
@@ -217,10 +262,12 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      box-shadow: 0 12px 28px rgba(17, 19, 13, 0.18);
     }
 
     .btn-primary:hover {
-      background: #0077ED;
+      background: #000;
+      transform: translateY(-1px);
     }
 
     .btn-primary:active {
@@ -228,13 +275,13 @@
     }
 
     .btn-secondary {
-      background: white;
-      color: #1D1D1F;
+      background: rgba(255, 255, 255, 0.92);
+      color: var(--ink);
       padding: 10px 18px;
       border-radius: 100px;
       font-size: 14px;
       font-weight: 500;
-      border: 1px solid #D1D1D6;
+      border: 1px solid rgba(17, 19, 13, 0.12);
       cursor: pointer;
       transition: all 0.2s ease;
       display: inline-flex;
@@ -244,8 +291,8 @@
     }
 
     .btn-secondary:hover {
-      background: #F5F5F7;
-      border-color: #B8B8BE;
+      background: var(--accent-soft);
+      border-color: rgba(17, 19, 13, 0.2);
     }
 
     .input-action-button {
@@ -275,9 +322,9 @@
     }
 
     .empty-state {
-      border: 2px dashed #E5E5EA;
-      border-radius: 20px;
-      background: rgba(255, 255, 255, 0.5);
+      border: 2px dashed rgba(17, 19, 13, 0.12);
+      border-radius: 24px;
+      background: rgba(248, 252, 225, 0.9);
     }
 
     .modal-overlay {
@@ -287,7 +334,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0, 0, 0, 0.4);
+      background: rgba(17, 19, 13, 0.28);
       justify-content: center;
       align-items: center;
       z-index: 1000;
@@ -298,13 +345,14 @@
     }
 
     .modal {
-      background: white;
-      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(212, 255, 23, 0.64) 0 16px, rgba(255,255,255,0.98) 16px 100%);
+      border-radius: 28px;
       width: 90%;
       max-width: 720px;
       max-height: 85vh;
       overflow-y: auto;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 28px 80px rgba(63, 76, 14, 0.22);
+      border: 1px solid rgba(255,255,255,0.86);
     }
 
     .timeline-item::before {
@@ -314,7 +362,7 @@
       top: 28px;
       bottom: -12px;
       width: 2px;
-      background: #E5E5EA;
+      background: rgba(17, 19, 13, 0.1);
     }
 
     .timeline-item:last-child::before {
@@ -338,40 +386,81 @@
 
     .kanban-column {
       flex: 1;
-      min-width: 160px;
+      min-width: 220px;
+    }
+
+    .main-shell {
+      position: relative;
+      z-index: 1;
+      padding-top: 8px;
+    }
+
+    .hero-icon {
+      background: var(--accent);
+      color: #11130d;
+      box-shadow: inset 0 -6px 12px rgba(123, 145, 5, 0.18);
+    }
+
+    .status-pill {
+      background: rgba(247, 248, 242, 0.92);
+      border: 1px solid rgba(17, 19, 13, 0.08);
+      color: var(--ink);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
+    }
+
+    .header-icon-button {
+      color: var(--muted);
+      background: rgba(255,255,255,0.68);
+      border: 1px solid rgba(17, 19, 13, 0.08);
+    }
+
+    .header-icon-button:hover {
+      color: var(--ink);
+      background: var(--accent-soft);
+    }
+
+    .section-title {
+      color: var(--ink);
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .mini-muted {
+      color: var(--muted);
     }
   </style>
 </head>
 <body>
-  <div class="min-h-screen">
+  <div class="min-h-screen main-shell">
     <!-- 顶部导航栏 -->
-    <header class="glass-header sticky top-0 z-30 border-b border-[#E5E5EA] px-6 py-2.5 flex items-center justify-between">
+    <header class="glass-header sticky top-3 z-30 mx-4 md:mx-6 px-6 py-3 flex items-center justify-between">
       <div class="flex items-center gap-3">
-        <div class="bg-[#1D1D1F] p-2 rounded-xl">
-          <i class="fas fa-robot text-white text-sm"></i>
+        <div class="hero-icon p-3 rounded-[22px]">
+          <i class="fas fa-robot text-sm"></i>
         </div>
         <div>
           <h1 class="text-xl font-semibold tracking-tight">
-            白白板 <span class="font-normal text-[#86868B] ml-1">Maximize Every Token</span>
+            白白板 <span class="font-normal mini-muted ml-1">Maximize Every Token</span>
           </h1>
-          <p class="text-[11px] text-[#86868B] mt-0.5">目标就一个：一句话出结果。</p>
+          <p class="text-[11px] mini-muted mt-0.5">目标就一个：一句话出结果。</p>
         </div>
       </div>
 
       <div class="flex items-center gap-4">
-        <div id="ws-status" class="flex items-center gap-2 px-3 py-1.5 bg-[#F5F5F7] rounded-full text-[13px] font-medium">
+        <div id="ws-status" class="status-pill flex items-center gap-2 px-3 py-1.5 rounded-full text-[13px] font-medium">
           <div class="w-2 h-2 rounded-full bg-[#FF3B30]"></div>
           已断开
         </div>
-        <div id="scheduler-status" class="flex items-center gap-2 px-3 py-1.5 bg-[#F5F5F7] rounded-full text-[13px] font-medium">
+        <div id="scheduler-status" class="status-pill flex items-center gap-2 px-3 py-1.5 rounded-full text-[13px] font-medium">
           <div class="w-2 h-2 rounded-full bg-[#34C759]"></div>
           调度器已停止
         </div>
-        <div class="w-[1px] h-4 bg-[#D1D1D6] mx-1"></div>
-        <button onclick="refreshAll()" class="p-2 text-[#86868B] hover:text-[#1D1D1F] hover:bg-[#E5E5EA] rounded-full transition-colors">
+        <div class="w-[1px] h-4 bg-[rgba(17,19,13,0.12)] mx-1"></div>
+        <button onclick="refreshAll()" class="header-icon-button p-2 rounded-full transition-colors">
           <i class="fas fa-rotate-right"></i>
         </button>
-        <button onclick="toggleSelectMode()" id="select-mode-btn" class="p-2 text-[#86868B] hover:text-[#1D1D1F] hover:bg-[#E5E5EA] rounded-full transition-colors">
+        <button onclick="toggleSelectMode()" id="select-mode-btn" class="header-icon-button p-2 rounded-full transition-colors">
           <i class="fas fa-check-square"></i>
         </button>
         <a href="https://github.com/MaiHHConnect/claude-whiteboard" target="_blank" rel="noreferrer" class="btn-secondary">
@@ -386,13 +475,13 @@
     </header>
 
     <!-- 主内容区 -->
-    <main class="max-w-[1600px] mx-auto p-4 space-y-6">
+    <main class="max-w-[1600px] mx-auto px-4 pb-6 pt-5 space-y-6">
 
       <!-- 批量操作栏 -->
-      <div id="batch-action-bar" class="hidden bg-[#F5F5F7] rounded-xl p-3 flex items-center justify-between">
+      <div id="batch-action-bar" class="hidden bg-[rgba(255,255,255,0.84)] border border-[rgba(17,19,13,0.08)] rounded-[24px] p-3 flex items-center justify-between shadow-[0_14px_32px_rgba(78,92,19,0.08)]">
         <div class="flex items-center gap-3">
           <span class="text-[13px] font-medium text-[#1D1D1F]">已选择 <span id="selected-count">0</span> 个任务</span>
-          <button onclick="selectedTasks.clear(); toggleSelectMode();" class="text-[13px] text-[#86868B] hover:text-[#1D1D1F]">
+          <button onclick="selectedTasks.clear(); toggleSelectMode();" class="text-[13px] mini-muted hover:text-[#1D1D1F]">
             取消选择
           </button>
         </div>
@@ -463,7 +552,7 @@
       <!-- 正在执行的任务 -->
       <section>
         <div class="flex items-center justify-between mb-3 px-1">
-          <h2 class="text-[14px] font-semibold tracking-tight">执行中的任务</h2>
+          <h2 class="section-title">执行中的任务</h2>
         </div>
         <div id="active-tasks-container">
           <!-- 动态生成 -->
@@ -472,7 +561,7 @@
 
       <!-- 任务看板 -->
       <section class="kanban-scroll">
-        <div id="board" class="flex gap-4">
+        <div id="board" class="flex gap-4 items-start">
           <!-- 动态生成 -->
         </div>
       </section>
@@ -884,11 +973,11 @@
                   ? ' · 正在整理输出'
                   : ''
             return `
-              <div class="flex items-center gap-2 px-3 py-1.5 bg-white rounded-full shadow-sm">
-                <div class="w-2 h-2 bg-[#34C759] rounded-full animate-pulse"></div>
-                <i class="fas fa-robot text-[#86868B] text-xs"></i>
+              <div class="flex items-center gap-2 px-3 py-1.5 bg-[rgba(255,255,255,0.92)] border border-[rgba(17,19,13,0.08)] rounded-full shadow-[0_10px_24px_rgba(77,90,28,0.08)]">
+                <div class="w-2 h-2 bg-[#a4d700] rounded-full animate-pulse"></div>
+                <i class="fas fa-robot text-[#4f5742] text-xs"></i>
                 <span class="text-[13px] font-medium text-[#1D1D1F]">${escapeHtml(agentDisplayName)}</span>
-                <span class="text-[10px] text-[#86868B]">${modeLabel}${activityHint}</span>
+                <span class="text-[10px] text-[#68715f]">${modeLabel}${activityHint}</span>
               </div>
             `
           }).join('')}
@@ -1217,7 +1306,7 @@
           <div class="kanban-column">
             <div class="flex justify-between items-center mb-2 px-1">
               <h3 class="font-semibold text-[#1D1D1F] text-[12px] tracking-tight">${status.label}</h3>
-              <span class="bg-[#E5E5EA] text-[#1D1D1F] text-[10px] font-medium px-1 py-0.5 rounded-full">
+              <span class="bg-[#11130d] text-white text-[10px] font-medium px-2 py-0.5 rounded-full">
                 ${allTasks.length}
               </span>
             </div>
@@ -1279,7 +1368,7 @@
                       <div class="flex items-center gap-1 mb-1">
                         <span class="w-2 h-2 rounded-full bg-[#34C759] animate-pulse"></span>
                         <span class="text-[9px] text-[#86868B]">${runtimeSession?.agentName || agentName || '进行中'}${runtimeSession?.currentTool?.name ? ` · ${escapeHtml(runtimeSession.currentTool.name)}` : ''}</span>
-                        <button onclick="event.stopPropagation(); openQuickMessage('${task.id}')" class="ml-auto flex-shrink-0 w-5 h-5 rounded-full ${liveSession?.active ? 'bg-[#34C759] hover:bg-[#30B454]' : 'bg-[#0071E3] hover:bg-[#0077ED]'} flex items-center justify-center shadow-sm">
+                        <button onclick="event.stopPropagation(); openQuickMessage('${task.id}')" class="ml-auto flex-shrink-0 w-5 h-5 rounded-full ${liveSession?.active ? 'bg-[#11130d] hover:bg-[#000000]' : 'bg-[#11130d] hover:bg-[#000000]'} flex items-center justify-center shadow-sm">
                           <i class="fas ${liveSession?.active ? 'fa-comments' : 'fa-paper-plane'} text-[8px] text-white"></i>
                         </button>
                       </div>
@@ -1288,8 +1377,8 @@
                         <span class="w-2 h-2 rounded-full ${liveSession?.active ? 'bg-[#34C759]' : agentName ? 'bg-[#FF9500]' : 'bg-[#86868B]'}"></span>
                         <span class="text-[9px] text-[#86868B]">${liveSession?.active ? (liveSession.agentName || '实时会话') : runtimeSession?.active ? (runtimeSession.agentName || '执行中') : (agentName || status.label)}</span>
                         ${canQuickMessage ? `
-                        <button onclick="event.stopPropagation(); openQuickMessage('${task.id}')" class="ml-auto flex-shrink-0 w-5 h-5 rounded-full ${liveSession?.active ? 'bg-[#34C759] hover:bg-[#30B454]' : 'bg-[#E5E5EA] hover:bg-[#D1D1D6]'} flex items-center justify-center shadow-sm">
-                          <i class="fas fa-comments text-[8px] ${liveSession?.active ? 'text-white' : 'text-[#1D1D1F]'}"></i>
+                        <button onclick="event.stopPropagation(); openQuickMessage('${task.id}')" class="ml-auto flex-shrink-0 w-5 h-5 rounded-full ${liveSession?.active ? 'bg-[#11130d] hover:bg-[#000000]' : 'bg-[#efff9e] hover:bg-[#d4ff17]'} flex items-center justify-center shadow-sm">
+                          <i class="fas fa-comments text-[8px] ${liveSession?.active ? 'text-white' : 'text-[#11130d]'}"></i>
                         </button>
                         ` : ''}
                       </div>
@@ -1352,12 +1441,12 @@
               `}).join('')}
             </div>
             ${totalPages > 1 ? `
-            <div class="flex items-center justify-between mt-2 px-1 text-[10px] text-[#86868B]">
-              <button onclick="changePage('${status.id}', -1)" class="px-2 py-1 hover:bg-[#E5E5EA] rounded ${currentPage <= 1 ? 'opacity-30 pointer-events-none' : ''}">
+            <div class="flex items-center justify-between mt-2 px-1 text-[10px] text-[#68715f]">
+              <button onclick="changePage('${status.id}', -1)" class="px-2 py-1 hover:bg-[#efff9e] rounded-full ${currentPage <= 1 ? 'opacity-30 pointer-events-none' : ''}">
                 ‹ 上一页
               </button>
               <span>${currentPage}/${totalPages}</span>
-              <button onclick="changePage('${status.id}', 1)" class="px-2 py-1 hover:bg-[#E5E5EA] rounded ${currentPage >= totalPages ? 'opacity-30 pointer-events-none' : ''}">
+              <button onclick="changePage('${status.id}', 1)" class="px-2 py-1 hover:bg-[#efff9e] rounded-full ${currentPage >= totalPages ? 'opacity-30 pointer-events-none' : ''}">
                 下一页 ›
               </button>
             </div>

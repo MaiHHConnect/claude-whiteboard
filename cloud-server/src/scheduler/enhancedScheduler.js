@@ -3857,6 +3857,8 @@ ${this.buildAgentSkillContext(agent)}
         beforeCleanup: workspaceConfig.hooks?.beforeCleanup
       })
 
+      db.releaseAgent(activeTask.agent.id, taskId)
+
       // 从活跃列表移除
       this.activeTasks.delete(taskId)
 
@@ -3906,14 +3908,13 @@ ${this.buildAgentSkillContext(agent)}
       for (const task of tasks) {
         if (task.assignedAgentId && !this.activeTasks.has(task.id)) {
           console.log(`[Scheduler] Cleaning orphaned task ${task.id} (status=${status}, assigned=${task.assignedAgentId})`)
-          task.assignedAgentId = null
+          db.releaseAgent(task.assignedAgentId, task.id)
           cleaned++
         }
       }
     }
 
     if (cleaned > 0) {
-      db.save()
       console.log(`[Scheduler] Cleaned ${cleaned} orphaned tasks`)
     }
   }

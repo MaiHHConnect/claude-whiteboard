@@ -700,7 +700,12 @@ export class EnhancedScheduler {
       .replace(/^[`"'([{<]+/, '')
       .replace(/[`"')\]}>:;,，。；]+$/, '')
 
-    cleanedValue = cleanedValue.replace(/(\.[A-Za-z0-9]{1,8})(?:[（(][^/\\()（）]*[）)])$/, '$1')
+    // Strip short explanatory annotations that are commonly appended to artifact
+    // paths in handoff text, such as:
+    // `/tmp/REQUIREMENTS.md（已追加验证结果）—— 说明文字`
+    cleanedValue = cleanedValue
+      .replace(/(\.[A-Za-z0-9]{1,8})(?:[（(][^/\\()（）]*[）)])(?=\s*[—–-]{1,2}\s*|$)/, '$1')
+      .replace(/(\.[A-Za-z0-9]{1,8})\s*[—–-]{1,2}\s*.*$/, '$1')
 
     if (!cleanedValue || /^(https?:)?\/\//i.test(cleanedValue)) {
       return []

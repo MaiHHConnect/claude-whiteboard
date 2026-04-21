@@ -751,7 +751,10 @@ export class EnhancedScheduler {
     const patterns = [
       /(?:^|[\s"'`:(\[])(\/[^\s"'`)\]}<>]+)/g,
       /(?:^|[\s"'`:(\[])((?:\.\.?\/|\.omc\/|src\/|public\/|docs\/|dist\/|build\/|workspaces\/)[^\s"'`)\]}<>]+)/g,
-      /(?<![\\/])\b([A-Za-z0-9._-]+\.(?:md|txt|html|css|js|cjs|mjs|ts|tsx|jsx|json|ya?ml|png|jpe?g|webp|svg|gif|csv|mp4|mov))\b(?![\\/])/g
+      // Standalone filenames should not be re-extracted from inside an existing path
+      // such as `/tmp/.omc_context_scan.md`, otherwise the embedded basename
+      // `omc_context_scan.md` is incorrectly treated as another required artifact.
+      /(?:^|[\s"'`:(\[])(\.?[A-Za-z0-9][A-Za-z0-9._-]*\.(?:html|json|ya?ml|cjs|mjs|tsx|jsx|png|jpe?g|webp|svg|gif|csv|mp4|mov|css|txt|md|ts|js))(?![\\/])/g
     ]
 
     for (const pattern of patterns) {
